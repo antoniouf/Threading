@@ -1,3 +1,4 @@
+// CThreadSafeQueue.h
 #ifndef ThreadSafeQueue_25E036CF1FB84D9EA139BD446F9B15A4
 #define ThreadSafeQueue_25E036CF1FB84D9EA139BD446F9B15A4
 
