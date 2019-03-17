@@ -15,7 +15,7 @@ public:
 
     void push(T Item);
 
-    bool try_pop(T &Val); // assign top item to Val
+    bool try_pop(T &Val);
     std::shared_ptr<T> try_pop();
 
     void wait_and_pop(T &Val);
