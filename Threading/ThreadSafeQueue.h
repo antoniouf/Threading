@@ -7,11 +7,12 @@
 #include <mutex>
 #include <queue>
 
-template <typename T> class CThreadSafeQueue {
+template <typename T> 
+class CThreadSafeQueue {
 public:
     CThreadSafeQueue() = default;
     CThreadSafeQueue(const CThreadSafeQueue &);
-    CThreadSafeQueue &operator=(const CThreadSafeQueue &) = delete;
+    CThreadSafeQueue& operator=(const CThreadSafeQueue&) = delete;
 
     void push(T Item);
 

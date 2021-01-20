@@ -2,7 +2,7 @@
 #include <ThreadSafeQueue.h>
 
 template <typename T>
-inline CThreadSafeQueue<T>::CThreadSafeQueue(const CThreadSafeQueue &Source)
+inline CThreadSafeQueue<T>::CThreadSafeQueue(const CThreadSafeQueue& Source)
 {
     std::lock_guard<std::mutex> Lock(Source.m_Mtx);
     m_data = Source.m_data;
@@ -17,7 +17,7 @@ void CThreadSafeQueue<T>::push(T Item)
 }
 
 template<typename T>
-bool CThreadSafeQueue<T>::try_pop(T & Val)
+bool CThreadSafeQueue<T>::try_pop(T& Val)
 {
     std::lock_guard<std::mutex> Lock(m_Mtx);
     if (m_data.empty())
