@@ -1,5 +1,5 @@
 // CThreadSafeQueue.cpp
-#include <ThreadSafeQueue.h>
+#include "ThreadSafeQueue.h"
 
 template <typename T>
 inline CThreadSafeQueue<T>::CThreadSafeQueue(const CThreadSafeQueue& Source)
