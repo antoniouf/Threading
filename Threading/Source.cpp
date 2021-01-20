@@ -83,10 +83,10 @@ double TestParallel(long long NumSteps) {
     Step = 1.0 / (double)NumSteps;
 
 #pragma omp parallel for reduction(+:Sum) private(x)
-        for (i = 1; i <= NumSteps; i++) {
-            x = (i - 0.5) * Step;
-            Sum = Sum + 4.0 / (1.0 + x * x);
-        }
+    for (i = 1; i <= NumSteps; i++) {
+        x = (i - 0.5) * Step;
+        Sum = Sum + 4.0 / (1.0 + x * x);
+    }
 
     Pi = Step * Sum;
     return Pi;
@@ -115,7 +115,16 @@ void TestOpenMP(int argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
+    // Simple test for OpenMP interface
+    // This statement will run on each thread. If there
+    // are 8 threads this will execute 8 times in total. 
+#pragma omp parallel
+    {
+        std::cout << "Running on parallel threads..\n";
+    }
+
     TestThreading();
     TestOpenMP(argc, argv);
+
     return 0;
 }
