@@ -1,6 +1,7 @@
 #include "ThreadSafeQueue.h"
 #include <mutex>
 #include <thread>
+#include <iomanip>
 #include <iostream>
 #include <omp.h>
 #include <windows.h>
@@ -94,7 +95,7 @@ double TestParallel(long long NumSteps) {
 
 void TestOpenMP(int argc, char* argv[])
 {
-    double   d;
+    double d;
     long long n = 1e10;
 
     if (argc > 1)
@@ -104,11 +105,19 @@ void TestOpenMP(int argc, char* argv[])
 
     Start = GetTickCount64();
     d = TestSequential(n);
-    printf_s("For %d steps, pi = %.15f, single-thread: %lu milliseconds\n", n, d, GetTickCount64() - Start);
+    const DWORD TimeSingleThread = GetTickCount64() - Start;
+    printf_s("For %d steps, pi = %.15f, single-thread: %lu milliseconds\n",
+        n, d, TimeSingleThread);
 
     Start = GetTickCount64();
     d = TestParallel(n);
-    printf_s("For %d steps, pi = %.15f, parallel: %lu milliseconds\n", n, d, GetTickCount64() - Start);
+    const DWORD TimeMultiThread = GetTickCount64() - Start;
+    printf_s("For %d steps, pi = %.15f, parallel: %lu milliseconds\n",
+        n, d, TimeMultiThread);
+
+    const double SpeedUp = static_cast<double>(TimeSingleThread) / TimeMultiThread;
+    std::cout << "The speedup using multithreading with OpemMP: " <<
+        std::setprecision(5) << SpeedUp  << "\n";
 }
 
 //////////////////////////////////////////////////////////////////////////////
